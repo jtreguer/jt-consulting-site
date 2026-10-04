@@ -1,0 +1,350 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+
+const references = ['BNP Paribas', 'Crédit Agricole', 'Vicomtech', 'ESTIA', 'QuantsUnited', 'Astroteq.ai'];
+
+// Illustrative rankings for the two offer cards. Scores out of 12.
+const dataExample = [
+  { label: 'prévision de la demande', score: 10, verdict: 'à faire' },
+  { label: 'maintenance préventive', score: 7, verdict: 'à préparer' },
+  { label: 'contrôle qualité par image', score: 4, verdict: 'plus tard' },
+];
+const aiExample = [
+  { label: 'rédaction des devis', score: 11, verdict: 'à faire' },
+  { label: 'tri des courriels entrants', score: 7, verdict: 'à planifier' },
+  { label: 'chatbot sur le site', score: 2, verdict: 'à éviter' },
+];
+const bar = (n: number) => ({ full: '█'.repeat(n), empty: '░'.repeat(12 - n) });
+
+const faq = [
+  {
+    q: 'Nous avons très peu de données. Est-ce que ça vaut la peine ?',
+    a: "Oui. Savoir quelles données commencer à collecter, et comment, est souvent le résultat le plus utile d'un diagnostic. Une donnée que vous commencez à enregistrer aujourd'hui sera exploitable dans un an.",
+  },
+  {
+    q: 'Notre service informatique ne pourrait-il pas le faire ?',
+    a: "Votre équipe informatique connaît vos systèmes mieux que personne. Ce qu'elle n'a pas toujours, c'est le temps de faire le tour des métiers, de chiffrer les gains et de trier ce qui vaut la peine. Je travaille avec elle, et ce que je recommande doit pouvoir être maintenu par elle.",
+  },
+  {
+    q: 'Nos données sont confidentielles. Faut-il les envoyer chez OpenAI ?',
+    a: "Non. Beaucoup de besoins se traitent avec des modèles installés chez vous, sur vos serveurs, sans que rien ne sorte de l'entreprise. La question est posée dès le premier entretien, parce qu'elle détermine toute la suite.",
+  },
+  {
+    q: 'Et si le diagnostic ne trouve rien qui vaille la peine ?',
+    a: "Alors il vous le dit, avec les raisons, et vous avez évité de financer un projet inutile. Chaque diagnostic contient aussi au moins une action que vous pouvez mener vous-même la semaine suivante, sans frais.",
+  },
+  {
+    q: 'Vous travaillez seul. Que se passe-t-il si vous êtes indisponible ?',
+    a: "Tout ce que je livre est documenté pour être repris par quelqu'un d'autre : rapport lisible sans moi, code et procédures transmis à vos équipes. Une mission doit pouvoir se terminer sans vous laisser dépendant.",
+  },
+  {
+    q: 'Pourquoi payer un diagnostic quand d’autres le proposent gratuitement ?',
+    a: "Un diagnostic gratuit débouche sur une proposition commerciale. Le mien débouche sur une liste d'opportunités chiffrées qui vous appartient, que vous pouvez réaliser avec moi, avec quelqu'un d'autre ou en interne.",
+  },
+];
+---
+
+<Base
+  title="Julien Treguer · Conseil IA et data pour les PME du Pays basque, de Pau et de Bordeaux"
+  description="Vous savez que l'IA compte, mais pas quoi en faire. Diagnostic de vos données et de vos processus pour les PME du Pays basque, du Béarn et de la région bordelaise : quoi, en combien de temps, pour quels résultats."
+>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+      <p class="label">conseil IA &amp; data · {site.area}</p>
+      <h1>L'IA compte pour votre entreprise. Reste à savoir quoi en faire.<span class="cursor" aria-hidden="true"></span></h1>
+      <p class="lead">
+        Tout le monde en parle, peu de gens vous disent par où commencer. J'aide les PME de la région à
+        répondre à deux questions simples, avec un résultat concret et un délai fixés avant de commencer.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href={site.bookingUrl}>Réserver un appel de 30 minutes</a>
+        <a href="#questions">Voir les deux questions →</a>
+      </div>
+      <p class="hero-note">Appel gratuit, sans préparation, sans engagement.</p>
+      </div>
+      <figure class="term" aria-label="Les deux questions de départ et ce que vous obtenez">
+        <div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>diagnostic</span></div>
+        <div class="term-body">
+          <p class="q" style="--i:0">que valent mes données ?</p>
+          <p class="a" style="--i:1">ce qu'elles permettent de prévoir</p>
+          <p class="a" style="--i:2">usages classés par gain en €</p>
+          <p class="a" style="--i:3">quoi collecter si elles manquent</p>
+          <p class="gap" style="--i:3"></p>
+          <p class="q" style="--i:4">que change l'IA pour mon entreprise ?</p>
+          <p class="a" style="--i:5">où se perd le temps</p>
+          <p class="a" style="--i:6">ce qu'on automatise, ce qu'on évite</p>
+          <p class="a" style="--i:7">un premier projet, chiffré<span class="cursor" aria-hidden="true"></span></p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <p class="strip-label">Missions et parcours</p>
+      <ul class="strip-names">{references.map((r) => <li>{r}</li>)}</ul>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="label">01 / le constat</p>
+        <h2>Ce que j'entends le plus souvent</h2>
+      </div>
+      <div class="grid-3">
+        <div class="pain reveal">
+          <h3>« Il faudrait qu'on fasse quelque chose avec l'IA. »</h3>
+          <p>Mais quoi ? Les démonstrations impressionnent, les offres se ressemblent, et personne ne parle de votre métier.</p>
+        </div>
+        <div class="pain reveal">
+          <h3>« On a des années de données, on n'en fait rien. »</h3>
+          <p>Fichiers Excel, ERP, relevés machines, devis, bons de commande. Vous sentez qu'il y a quelque chose à en tirer sans savoir quoi.</p>
+        </div>
+        <div class="pain reveal">
+          <h3>« On n'a pas le temps de tester au hasard. »</h3>
+          <p>Une PME ne peut pas financer trois projets pour en garder un. Il faut savoir avant de dépenser.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="questions">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="label">02 / l'offre</p>
+        <h2>Deux questions pour commencer</h2>
+        <p>
+          Choisissez celle qui vous ressemble. Chacune commence par un diagnostic dont le contenu, la durée
+          et le prix sont fixés avant de signer. La réalisation qui suit, si vous la souhaitez, est chiffrée
+          à partir de ce diagnostic.
+        </p>
+      </div>
+      <div class="grid-2">
+        <article class="offer reveal">
+          <div class="offer-tab"><span>question_1</span><span>data science</span></div>
+          <div class="offer-body">
+          <h3>Que valent mes données ?</h3>
+          <p class="tag">audit de données · prévision · détection · optimisation</p>
+          <dl>
+            <dt>Quoi</dt>
+            <dd>
+              <ul>
+                <li>L'inventaire de vos données : ERP, tableurs, capteurs, historiques</li>
+                <li>Ce qu'elles permettent de prévoir, de détecter ou d'optimiser</li>
+                <li>Pannes, rebuts, délais, stocks, demande, consommation d'énergie</li>
+              </ul>
+            </dd>
+            <dt>Durée du diagnostic</dt>
+            <dd>Deux à trois semaines, dont deux jours chez vous.</dd>
+            <dt>Prix du diagnostic</dt>
+            <dd>Un forfait fixe, annoncé avant de commencer.</dd>
+            <dt>Pour quel résultat</dt>
+            <dd>
+              Une liste d'usages classés par gain estimé en euros et par faisabilité. Si vos données ne
+              suffisent pas encore : lesquelles collecter, et comment.
+            </dd>
+            <dt>Et ensuite</dt>
+            <dd>
+              Préparation des données, choix et entraînement des modèles, mise en production et suivi.
+              Comptez plutôt quelques mois. Le diagnostic en donne la durée et le budget.
+            </dd>
+          </dl>
+          <figure class="bars">
+            <figcaption>exemple de classement (fictif)</figcaption>
+            <table>
+              <tbody>
+                {dataExample.map((row) => (
+                  <tr>
+                    <td>{row.label}</td>
+                    <td class="bar" aria-label={`${row.score} sur 12`}>{bar(row.score).full}<span class="empty">{bar(row.score).empty}</span></td>
+                    <td>{row.verdict}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </figure>
+          </div>
+        </article>
+        <article class="offer reveal">
+          <div class="offer-tab"><span>question_2</span><span>IA générative</span></div>
+          <div class="offer-body">
+          <h3>Que change l'IA pour mon entreprise ?</h3>
+          <p class="tag">automatisation · agents · processus</p>
+          <dl>
+            <dt>Quoi</dt>
+            <dd>
+              <ul>
+                <li>Des entretiens avec vos équipes, sur le terrain</li>
+                <li>Où se perd le temps : ressaisies, recherche d'information, devis, rapports, courriers</li>
+                <li>Ce qui peut être automatisé, et ce qui doit d'abord être réorganisé</li>
+              </ul>
+            </dd>
+            <dt>Durée du diagnostic</dt>
+            <dd>Deux à trois semaines, dont deux jours chez vous.</dd>
+            <dt>Prix du diagnostic</dt>
+            <dd>Un forfait fixe, annoncé avant de commencer.</dd>
+            <dt>Pour quel résultat</dt>
+            <dd>
+              Une liste d'opportunités chiffrées, un premier projet recommandé avec un objectif mesurable,
+              et ce qu'il vaut mieux ne pas faire.
+            </dd>
+            <dt>Et ensuite</dt>
+            <dd>
+              Réorganisation des processus, développement des automatisations ou des agents IA,
+              intégration à vos outils, formation des équipes. Comptez plutôt quelques mois. Le diagnostic
+              en donne la durée et le budget.
+            </dd>
+          </dl>
+          <figure class="bars">
+            <figcaption>exemple de classement (fictif)</figcaption>
+            <table>
+              <tbody>
+                {aiExample.map((row) => (
+                  <tr>
+                    <td>{row.label}</td>
+                    <td class="bar" aria-label={`${row.score} sur 12`}>{bar(row.score).full}<span class="empty">{bar(row.score).empty}</span></td>
+                    <td>{row.verdict}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </figure>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="label">03 / la méthode</p>
+        <h2>Comment ça se passe</h2>
+      </div>
+      <ol class="steps grid-3">
+        <li class="reveal">
+          <h3>Un appel de 30 minutes</h3>
+          <p>Vous décrivez votre situation. Je vous dis honnêtement si je peux être utile, et laquelle des deux questions vous concerne.</p>
+        </li>
+        <li class="reveal">
+          <h3>Le diagnostic</h3>
+          <p>Deux à trois semaines. Il se termine par une demi-journée de travail avec la direction, où vous choisissez les priorités.</p>
+        </li>
+        <li class="reveal">
+          <h3>Vous décidez de la suite</h3>
+          <p>
+            Réaliser le projet ensemble, sur la durée et le budget estimés dans le diagnostic, former vos
+            équipes, ou avancer seuls avec le rapport. Les trois sont des issues normales.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="label">04 / les preuves</p>
+        <h2>Quelques réalisations</h2>
+      </div>
+      <div class="grid-3">
+        <article class="case reveal">
+          <p class="sector">#industrie #espagne</p>
+          <h3>Surveillance thermique en temps réel d'un four de raffinerie</h3>
+        </article>
+        <article class="case reveal">
+          <p class="sector">#banque #france</p>
+          <h3>Assistant conversationnel RH, livré par une équipe de deux personnes</h3>
+        </article>
+        <article class="case reveal">
+          <p class="sector">#finance</p>
+          <h3>Outil automatisé de surveillance des marchés crypto, avec alertes</h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="label">05 / pour qui</p>
+        <h2>Pour qui</h2>
+      </div>
+      <div class="grid-2 fit">
+        <div class="yes reveal">
+          <h3>Ça vous correspond si</h3>
+          <ul>
+            <li>vous dirigez une PME ou une ETI entre Bayonne, Pau et Bordeaux ;</li>
+            <li>vous sentez que l'IA ou vos données peuvent vous servir, sans savoir par où commencer ;</li>
+            <li>vous préférez une réponse chiffrée, même modeste, à une promesse vague ;</li>
+            <li>vous avez peu de données et voulez savoir quoi collecter.</li>
+          </ul>
+        </div>
+        <div class="no reveal">
+          <h3>Ça ne vous correspond pas si</h3>
+          <ul>
+            <li>vous cherchez le tarif journalier le plus bas ;</li>
+            <li>vous voulez un chatbot sur votre site pour l'affichage ;</li>
+            <li>vous avez déjà choisi l'outil et cherchez seulement quelqu'un pour l'installer.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap about">
+      <div class="portrait" role="img" aria-label="Portrait de Julien Treguer (à venir)">portrait.jpg</div>
+      <div>
+        <p class="label">06 / qui suis-je</p>
+        <h2>Julien Treguer</h2>
+        <p>
+          J'ai passé quinze ans dans la finance : sept ans chez BNP Paribas, puis ADI Alternative
+          Investment et SGAM AI, et trois ans de conseil en management auprès d'acteurs financiers.
+          Je parle de retour sur investissement avec une direction financière sans avoir besoin d'interprète.
+        </p>
+        <p>
+          Côté données, j'ai passé quatre ans à analyser des données cosmologiques pendant ma thèse, puis
+          près de quatre ans à concevoir et mettre en service des systèmes de machine learning et d'IA :
+          au centre de recherche Vicomtech, à l'ESTIA, chez QuantsUnited et Astroteq.ai.
+        </p>
+        <p>
+          J'enseigne la data science depuis 2018, chez Simplon.co puis à l'ESTIA, où j'enseigne aussi les
+          usages de l'IA générative.
+        </p>
+        <p>
+          Je suis installé au Pays basque. La personne qui fait le diagnostic est celle qui construit
+          ensuite : pas de commercial, pas de relais vers une équipe que vous n'avez jamais vue.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="label">07 / les questions</p>
+        <h2>Les questions qu'on n'ose pas toujours poser</h2>
+      </div>
+      <div class="faq">
+        {faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Vous ne savez pas encore quelle question vous concerne ?<span class="cursor" aria-hidden="true"></span></h2>
+      <p>C'est souvent la bonne façon de commencer. Trente minutes, sans préparation ni engagement.</p>
+      <a class="btn" href={site.bookingUrl}>Réserver un appel</a>
+    </div>
+  </section>
+</Base>

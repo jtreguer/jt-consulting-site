@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+---
+
+<Base title="Confidentialité · Julien Treguer" description="Politique de confidentialité du site de Julien Treguer." noindex>
+  <div class="wrap prose">
+    <h1>Confidentialité</h1>
+
+    <h2>Ce site ne dépose aucun cookie</h2>
+    <p>Il n'utilise ni outil de mesure d'audience, ni publicité, ni police de caractères chargée depuis un service tiers.</p>
+
+    <h2>Prise de rendez-vous</h2>
+    <p>Le bouton « Réserver un appel » vous dirige vers Calendly, un service tiers. Les informations que vous y saisissez (nom, adresse e-mail, réponses aux questions) sont traitées par Calendly selon sa propre politique de confidentialité, et me sont transmises pour préparer l'appel. Je les conserve le temps de notre échange et, si une mission suit, pour sa durée.</p>
+
+    <h2>Courrier électronique</h2>
+    <p>Si vous m'écrivez, votre message est conservé dans ma messagerie le temps nécessaire à notre échange.</p>
+
+    <h2>Vos droits</h2>
+    <p>Vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à <a href={`mailto:${site.email}`}>{site.email}</a>. Vous pouvez aussi saisir la CNIL (cnil.fr).</p>
+  </div>
+</Base>

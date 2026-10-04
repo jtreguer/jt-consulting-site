@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+---
+
+<Base title="Mentions légales · Julien Treguer" description="Mentions légales du site de Julien Treguer." noindex>
+  <div class="wrap prose">
+    <h1>Mentions légales</h1>
+
+    <h2>Éditeur du site</h2>
+    <p>{site.name}, entrepreneur individuel</p>
+    <p>Adresse : {site.legalAddress}</p>
+    <p>SIRET : {site.siret}</p>
+    <p>Contact : <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    <p>Directeur de la publication : {site.name}</p>
+
+    <h2>Hébergement</h2>
+    <p>Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, États-Unis. <!-- TODO: confirmer l'hébergeur --></p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>Les textes de ce site sont la propriété de {site.name}. Les noms d'entreprises cités le sont à titre de référence de missions ou de parcours professionnel.</p>
+  </div>
+</Base>
